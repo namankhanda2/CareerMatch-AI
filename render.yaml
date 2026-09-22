@@ -21,6 +21,11 @@ services:
     healthCheckPath: /api/health
     autoDeploy: true
     envVars:
+      # Pin the Python used by Render's build/runtime so all pinned compiled
+      # deps (pydantic-core 2.27.2, uvloop, httptools) have prebuilt wheels;
+      # newer default Pythons force source builds that fail.
+      - key: PYTHON_VERSION
+        value: "3.12"
       - key: GROQ_API_KEY
         sync: false # set the real key as a secret in the Render dashboard
       - key: GROQ_MODEL
