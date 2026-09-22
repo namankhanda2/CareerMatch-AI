@@ -1,4 +1,6 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? "";
+// Production: set VITE_API_BASE_URL at build time (e.g. the Render backend URL).
+// Local dev: defaults to http://localhost:8000 so no env file is required.
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8000").replace(/\/+$/, "");
 const TIMEOUT_MS = 60000;
 
 async function postForm(url, form) {
@@ -13,7 +15,7 @@ async function postForm(url, form) {
       signal: controller.signal,
     });
   } catch {
-    throw new Error("Could not reach the CareerMatch API. Is the backend running on port 8000?");
+    throw new Error("Could not reach the CareerMatch API. Please try again.");
   } finally {
     clearTimeout(timeout);
   }

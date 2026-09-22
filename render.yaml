@@ -6,8 +6,9 @@
 # GROQ_API_KEY is intentionally `sync: false` with NO value here so it is never
 # committed; set it in the Render dashboard when the blueprint is created.
 #
-# After the backend deploys it lives at https://careermatch-ai-backend.onrender.com.
-# If you change the backend service name, update VITE_API_URL below to match.
+# The deployed backend lives at https://careermatch-ai-backend-n637.onrender.com.
+# If you ever change the backend service, update VITE_API_BASE_URL and
+# CORS_ORIGINS below to match.
 
 services:
   - type: web
@@ -45,5 +46,5 @@ services:
         source: /*
         destination: /index.html
     envVars:
-      - key: VITE_API_URL
-        value: https://careermatch-ai-backend.onrender.com
+      - key: VITE_API_BASE_URL
+        value: https://careermatch-ai-backend-n637.onrender.com
