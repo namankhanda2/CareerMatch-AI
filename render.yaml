@@ -1,0 +1,41 @@
+# Render Blueprint for CareerMatch AI.
+#
+#   - FastAPI backend  -> Web Service (free)
+#   - React/Vite front -> Static Site (free)
+#
+# GROQ_API_KEY is intentionally `sync: false` with NO value here so it is never
+# committed; set it in the Render dashboard when the blueprint is created.
+#
+# After the backend deploys it lives at https://careermatch-ai-backend.onrender.com.
+# If you change the backend service name, update VITE_API_URL below to match.
+
+services:
+  - type: web
+    name: careermatch-ai-backend
+    runtime: python3
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false # set the real key as a secret in the Render dashboard
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
+      - key: CORS_ORIGINS
+        value: https://careermatch-ai-frontend.onrender.com,http://localhost:5173,http://127.0.0.1:5173
+
+  - type: static
+    name: careermatch-ai-frontend
+    plan: free
+    region: oregon
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_URL
+        value: https://careermatch-ai-backend.onrender.com
