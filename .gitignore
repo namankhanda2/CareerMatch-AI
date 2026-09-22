@@ -1,0 +1,37 @@
+# Environment
+.env
+.env.local
+*.env
+.env.save
+.env.backup
+.env.bak
+*.env.save
+*.env.backup
+*.env.bak
+
+# Python
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.venv/
+backend/venv/
+backend/*.pyc
+backend/data/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
