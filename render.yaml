@@ -32,7 +32,6 @@ services:
     name: careermatch-ai-frontend
     runtime: static
     plan: free
-    region: oregon
     rootDir: frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
